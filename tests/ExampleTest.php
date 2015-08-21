@@ -13,7 +13,7 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $res = $this->call('GET', 'node/add');
+        $this->assertEquals($res->getContent(), 'add0');
     }
 }

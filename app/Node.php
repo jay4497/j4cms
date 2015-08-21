@@ -25,4 +25,9 @@ class Node extends Model
     public function article(){
         return $this->hasMany('\App\Article');
     }
+
+    public function scopeTop($query){
+        return $query->where('depth', 0)
+                    ->orderBy('order', 'asc');
+    }
 }
