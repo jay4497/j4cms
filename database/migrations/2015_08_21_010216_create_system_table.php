@@ -12,7 +12,21 @@ class CreateSystemTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('system', function(Blueprint $table){
+            $table->increments('id');
+            $table->string('web_name');
+            $table->string('web_url');
+            $table->text('description')->nullable();
+            $table->text('keywords')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('email')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('address')->nullable();
+            $table->string('hotline')->nullable();
+            $table->string('copyright')->nullable();
+            $table->string('record')->nullable();
+        });
     }
 
     /**
@@ -22,6 +36,6 @@ class CreateSystemTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('system');
     }
 }
