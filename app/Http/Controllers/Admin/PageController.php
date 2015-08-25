@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
+    public function __construct(){
+        $this->middleware('guest');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +20,7 @@ class PageController extends Controller
      */
     public function index()
     {
+
         return view('admin.home');
     }
 

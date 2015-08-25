@@ -15,4 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('node/{act}/{id?}', 'Admin\NodeController@getUpdate');
+/*** Admin ***/
+Route::get('login', 'Admin\UserController@login');
+Route::get('admin', 'Admin\PageController@index');
+// node
+Route::controller('admin/node', 'Admin\NodeController');

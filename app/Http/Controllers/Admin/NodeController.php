@@ -24,10 +24,18 @@ class NodeController extends Controller
 
     public function getUpdate($act, $id = 0){
         $node = null;
-        if($act == 'edit'){
+        if($act != 'add'){
             $node = Node::find($id);
+            if($act == 'del'){
+                if($node->delete()){
+                    return redirect('admin/node?from=del&status=success');
+                }else{
+                    return redirect('admin/node?from=del&status=failed');
+                }
+            }
         }
-        return view('admin.node_update', compact('node'));
+        $nodes = Node::Top()->get();
+        return view('admin.node.update', compact('node', 'nodes'));
     }
 
     public function postUpdate($act, $id = 0, NodeRequest $request){
@@ -46,7 +54,7 @@ class NodeController extends Controller
         $node->path = $request->input('path');
         $node->show_type = $request->input('show_type');
         $node->content_type = $request->input('content_type');
-        $node->url = $request->input('url');
+        $node->url = $request->input('link');
         $node->parent_id = $request->input('parent');
         $node->order = $request->input('order');
         $dpt = $this->getDepth($request->input('parent'));

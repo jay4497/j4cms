@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'cms admin' => '后台管理',
+    'login' => '登 录',
+    'user name' => '用户名',
+    'user password' => '密码',
+    'input name' => '请输入用户名',
+    'input password' => '请输入密码',
+    'remember me' => '记住我',
+
+    'node manage' => '栏目管理',
+    'node add' => '添加新栏目',
+    'node update' => '栏目更新',
+    'node name' => '栏目名称',
+    'node path' => '栏目目录',
+    'orderby' => '排序',
+    'operate' => '操作',
+    'parent' => '父级',
+    'top lv' => '顶级',
+    'description' => '描述',
+    'keywords' => '关键词',
+    'image' => '图片',
+    'type' => '类型',
+    'ctype' => '属性',
+    'out link' => '外链',
+    'input out link' => '若类型选择了 外链，则此处要填写外链链接',
+    'content' => '内容',
+    'move to' => '移动到',
+    'edit' => '编辑',
+    'delete' => '删除',
+    'no data' => '暂无数据',
+];

@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests;
 
 class AuthController extends Controller
 {
@@ -31,6 +32,17 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+    }
+
+    public function postLogin(Requests\LoginRequest $request){
+        $userTemp['name'] = $request->input('name');
+        $userTemp['password'] = $request->input('password');
+        $remember = $request->input('remember');
+        if(auth()->attempt($userTemp, $remember)){
+            return redirect('admin');
+        }else{
+            return redirect()->back()->withErrors(['err' => lang('login failed')])->withInput();
+        }
     }
 
     /**

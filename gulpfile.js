@@ -1,4 +1,7 @@
-var elixir = require('laravel-elixir');
+var gulp = require('gulp'),
+    less = require('gulp-less'),
+    minifyCss = require('gulp-minify-css'),
+    minjs = require('gulp-uglify');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +14,22 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+gulp.task('admin-less', function(){
+ return gulp.src('resources/assets/less/admin.less')
+     .pipe(less())
+     .pipe(minifyCss())
+     .pipe(gulp.dest('public/assets/admin/css'));
+});
+
+gulp.task('less', function(){
+ return gulp.src('resources/assets/less/style.less')
+     .pipe(less())
+     .pipe(minifyCss())
+     .pipe(gulp.dest('public/assets/css'));
+});
+
+gulp.task('minjs', function(){
+ return gulp.src('resources/assets/js/*.js')
+     .pipe(minjs())
+     .pipe(gulp.dest('public/assets/js'));
 });
