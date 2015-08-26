@@ -26,6 +26,19 @@ class Node extends Model
         return $this->hasMany('\App\Article');
     }
 
+    public function chain($id){
+        $node = $this->find($id);
+        $nodeChain = [];
+        if($node){
+            $thread = trim($node->thread, '/');
+            $arr = explode('/', $thread);
+            foreach ($arr as $n) {
+                array_push($nodeChain, $this->find($n));
+            }
+        }
+        return $nodeChain;
+    }
+
     public function scopeTop($query){
         return $query->where('depth', 0)
                     ->orderBy('order', 'asc');

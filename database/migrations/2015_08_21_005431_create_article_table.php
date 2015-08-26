@@ -16,7 +16,7 @@ class CreateArticleTable extends Migration
             $table->increments('id');
             $table->integer('node_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->tinyInteger('type');    // inherits form node->content_type
+            $table->tinyInteger('type');    // inherits from node->content_type
             $table->string('title')->index();
             $table->string('seo_title');
             $table->text('description')->nullable();

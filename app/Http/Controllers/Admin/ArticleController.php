@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Article;
 
 class ArticleController extends Controller
 {
@@ -14,9 +15,31 @@ class ArticleController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function getIndex($type)
     {
-        //
+        $articles = Article::group($type)->paginate(15);
+        $nodes = \App\Node::top()->where('content_type', $type)->get();
+        return view('admin.article.index', compact('articles', 'nodes'));
+    }
+
+    public function getUpdate($act, $id = 0){
+        $article = null;
+        if($act != 'add'){
+            $article = Article::find($id);
+            if($act == 'delete'){
+                $url = \Request::header('Referer');
+                if($article->delete()){
+                    return redirect($url.'?from=del&status=success');
+                }else{
+                    return redirect($url.'?from=del&status=failed');
+                }
+            }
+        }
+        return view('admin.article.update', compact('article'));
+    }
+
+    public function postUpdate($act, $id = 0){
+
     }
 
     /**
