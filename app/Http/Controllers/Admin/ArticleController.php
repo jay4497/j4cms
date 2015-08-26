@@ -22,7 +22,7 @@ class ArticleController extends Controller
         return view('admin.article.index', compact('articles', 'nodes'));
     }
 
-    public function getUpdate($act, $id = 0){
+    public function getUpdate($type, $act, $id = 0){
         $article = null;
         if($act != 'add'){
             $article = Article::find($id);
@@ -38,8 +38,30 @@ class ArticleController extends Controller
         return view('admin.article.update', compact('article'));
     }
 
-    public function postUpdate($act, $id = 0){
-
+    public function postUpdate(Requests\ArticleRequest $request, $type, $act, $id = 0){
+        $article = new Article();
+        if($act == 'edit'){
+            $article = Article::find($id);
+        }
+        $article->user_id = \Auth::id();
+        $article->node_id = $request->input('node');
+        $article->title = $request->input('title');
+        $article->seo_title = $request->input('seo_title');
+        $article->description = $request->input('description');
+        $article->keywords = $request->input('keywords');
+        $article->type = $request->input('type');
+        $article->outline = $request->input('outline')?: str_limit(strip_tags($request->input('content')));
+        $article->content = $request->input('content');
+        $article->order = $request->input('order');
+        $article->hot = $request->input('hot')? 1: 0;
+        $article->status = $request->input('status')? 1: 0;
+        $article->recommend = $request->input('recommend')? 1: 0;
+        $article->show_index = $request->input('show_index')? 1: 0;
+        if($article->save()){
+            return redirect('admin/article/'.$type.'?from=update&status=success');
+        }else{
+            return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
+        }
     }
 
     /**

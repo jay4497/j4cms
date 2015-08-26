@@ -28,6 +28,7 @@ return [
     'input order' => '排序为数字，升序排列',
     'content' => '内容',
 
+    'select all' => '全选',
     'move to' => '移动到',
     'mark to' => '标记为',
     'hidden' => '隐藏',
@@ -37,5 +38,11 @@ return [
     'show index' => '在首页显示',
     'edit' => '编辑',
     'delete' => '删除',
+
     'no data' => '暂无数据',
+    'submit failed' => '发生错误，请重试',
+    'delete success' => '删除成功',
+    'delete failed' => '删除失败',
+    'update success' => '更新成功',
+    'update failed' => '更新失败',
 ];

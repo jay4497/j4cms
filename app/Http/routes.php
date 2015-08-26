@@ -20,3 +20,7 @@ Route::get('login', 'Admin\UserController@login');
 Route::get('admin', 'Admin\PageController@index');
 // node
 Route::controller('admin/node', 'Admin\NodeController');
+// article
+Route::controller('admin/article', 'Admin\ArticleController');
+// link
+Route::controller('admin/link', 'Admin\LinkController');

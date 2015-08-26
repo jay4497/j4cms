@@ -63,7 +63,7 @@ class NodeController extends Controller
         if($node->save()){
             return redirect('admin/node')->with('info', 'success');
         }else{
-            return redirect()->back()->withErrors(['err' => lang('failed')])->withInput();
+            return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }
     }
 
