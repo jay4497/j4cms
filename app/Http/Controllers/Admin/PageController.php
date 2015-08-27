@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class PageController extends Controller
 {
     public function __construct(){
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     /**
@@ -20,8 +20,7 @@ class PageController extends Controller
      */
     public function index()
     {
-
-        return view('admin.home');
+        return view('admin.index');
     }
 
     /**

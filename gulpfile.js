@@ -21,6 +21,12 @@ gulp.task('admin-less', function(){
      .pipe(gulp.dest('public/assets/admin/css'));
 });
 
+gulp.task('admin-minjs', function(){
+    return gulp.src('resources/assets/js/admin.js')
+        .pipe(minjs())
+        .pipe(gulp.dest('public/assets/admin/js'));
+});
+
 gulp.task('less', function(){
  return gulp.src('resources/assets/less/style.less')
      .pipe(less())
