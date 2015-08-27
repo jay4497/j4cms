@@ -8,7 +8,7 @@ class Ad extends Model
 {
     protected $table = 'ad';
 
-    protected $fillable = ['title', 'description', 'type', 'image', 'code', 'width', 'height', 'position_id', 'start_show', 'end_show'];
+    protected $fillable = ['title', 'description', 'url', 'type', 'image', 'code', 'width', 'height', 'position_id', 'start_show', 'end_show', 'order'];
 
     /**
      * show list of ads that show by an image

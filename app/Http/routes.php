@@ -24,3 +24,5 @@ Route::controller('admin/node', 'Admin\NodeController');
 Route::controller('admin/article', 'Admin\ArticleController');
 // link
 Route::controller('admin/link', 'Admin\LinkController');
+// feedback
+Route::controller('admin/feedback', 'Admin\FeedBackController');

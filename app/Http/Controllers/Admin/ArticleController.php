@@ -38,7 +38,7 @@ class ArticleController extends Controller
         return view('admin.article.update', compact('article'));
     }
 
-    public function postUpdate(Requests\ArticleRequest $request, $type, $act, $id = 0){
+    public function postUpdate(Requests\Admin\ArticleRequest $request, $type, $act, $id = 0){
         $article = new Article();
         if($act == 'edit'){
             $article = Article::find($id);

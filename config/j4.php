@@ -12,4 +12,9 @@ return [
         1 => 'product',
         2 => 'news'
     ],
+
+    'ad_type' => [
+        1 => 'image',
+        2 => 'code'
+    ],
 ];

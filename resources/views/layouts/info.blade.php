@@ -12,5 +12,9 @@
         @else
         {{ lang('update failed') }}
         @endif
+    @elseif(\Request::input('from') == 'show')
+        @if(\Request::input('status') == 'failed')
+        {{ lang('can not show') }}
+        @endif
     @endif
 </p>

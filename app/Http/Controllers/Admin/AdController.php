@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\FeedBack;
+use App\Ad;
 
-class FeedBackController extends Controller
+class AdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,44 +17,43 @@ class FeedBackController extends Controller
      */
     public function getIndex()
     {
-        $feedbacks = FeedBack::all();
-        return view('admin.feedback.index', compact('feedbacks'));
+        $ads = Ad::paginate(15);
+        return view('admin.ad.index', compact('ads'));
     }
 
-    public function getShow($id){
-        $feedback = FeedBack::find($id);
-        if($feedback){
-            return view('admin.feedback.show', compact('feedback'));
-        }else{
-            return redirect('admin/feedback?from=show&status=failed');
+    public function getUpdate($act, $id = 0){
+        $ad = null;
+        if($act != 'add'){
+            $ad = Ad::find($id);
+            if($act == 'delete'){
+                if($ad->delete()){
+                    return redirect('admin/ad?from=del&status=success');
+                }else{
+                    return redirect('admin/ad?from=del&status=failed');
+                }
+            }
         }
+        return view('admin.ad.update', compact('ad'));
     }
 
-    public function getUpdate($act, $id){
-        $ids = $id;
-        if(str_contains($id, ',')){
-            $ids = explode(',', $id);
+    public function postUpdate(Requests\Admin\AdRequest $request, $act, $id = 0){
+        $ad = new Ad();
+        if($act == 'edit'){
+            $ad = Ad::find($id);
         }
-        $query = FeedBack::whereIn('id', $ids);
-        $result = false;
-        switch($act){
-            case "no":
-                $result = $query->update(['status' => 0]);
-                break;
-            case "readed":
-                $result = $query->update(['status' => 1]);
-                break;
-            case "hidden":
-                $result = $query->update(['status' => 2]);
-                break;
-            case "delete":
-                $result = $query->delete();
-                break;
-        }
-        if($result){
-            return redirect('admin/feedback?from=update&status=success');
+        $ad->title = $request->input('title');
+        $ad->description = $request->input('description');
+        $ad->url = $request->input('url');
+        $ad->type = $request->input('type');
+        $ad->image = $request->input('image');
+        $ad->code = $request->input('code');
+        $ad->width = $request->input('width');
+        $ad->height = $request->input('height');
+        $ad->order = $request->input('order');
+        if($ad->save()){
+            return redirect('admin/ad?from=update&status=success');
         }else{
-            return redirect('admin/feedback?from=update&status=failed');
+            return redirect('admin/ad?from=update&status=failed');
         }
     }
 

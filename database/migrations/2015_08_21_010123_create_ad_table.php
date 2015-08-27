@@ -17,6 +17,7 @@ class CreateAdTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('type')->default(0);
+            $table->string('url')->nullable();
             $table->string('image')->nullable();
             $table->string('code')->nullable();
             $table->integer('width')->default(100);
