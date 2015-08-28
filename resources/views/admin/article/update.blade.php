@@ -74,7 +74,7 @@
                     <label class="checkbox-inline">
                         <input type="checkbox" name="status" />{{ lang('hidden') }}
                     </label>
-                    <label>
+                    <label class="checkbox-inline">
                         <input type="checkbox" name="show_index" />{{ lang('show index') }}
                     </label>
                 </div>
@@ -85,6 +85,7 @@
                     <input type="text" class="form-control" id="order" name="order" placeholder="{{ lang('input order') }}" />
                 </div>
             </div>
+            {{ csrf_field() }}
             <button class="btn btn-primary" type="submit">{{ lang('submit') }}</button>
         </form>
     </div>

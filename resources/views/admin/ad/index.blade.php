@@ -5,9 +5,22 @@
     <div class="panel-heading">{{ lang('ad manage') }}</div>
     <div class="panel-body">
         @include('layouts.info')
+        <p>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <a href="{{ action('Admin\AdController@getUpdate', ['act' => 'add']) }}">{{ lang('ad add') }}</a>
+        </p>
     </div>
     <table class="table">
         <thead>
+        <tr>
+            <td colspan="6">
+                <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}" />
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="check-all" />{{ lang('select all') }}
+                </label>&nbsp;&nbsp;
+                <a href="javascript:;" class="btn btn-default btn-sm" onclick="batchDel('{{ url('admin/ad') }}')">{{ lang('delete') }}</a>
+            </td>
+        </tr>
         <tr>
             <th></th>
             <th>{{ lang('title') }}({{ lang('orderby') }})</th>
@@ -17,10 +30,10 @@
             <th>{{ lang('operate') }}</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="check-trace">
         @forelse($ads as $ad)
         <tr>
-            <td><input type="checkbox" value="{{ $ad->id }}" /></td>
+            <td><input type="checkbox" class="check" value="{{ $ad->id }}" /></td>
             <td>{{ $ad->title }}({{ $ad->order }})</td>
             <td>{{ $ad->type }}</td>
             <td><img src="{{ $ad->image }}" /></td>

@@ -4,15 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">{{ lang('node manage') }}</div>
     <div class="panel-body">
-        @if(\Request::has('from'))
-        <p class="bg-info">
-            @if(\Request::input('status') == 'success')
-            {{ lang('delete success') }}
-            @else
-            {{ lang('delete failed') }}
-            @endif
-        </p>
-        @endif
+        @include('layouts.info')
         <p>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'add']) }}">{{ lang('node add') }}</a>
@@ -22,10 +14,14 @@
         <thead>
         <tr>
             <td colspan="5">
-                <input type="checkbox" class="checkbox" />{{ lang('select all') }}&nbsp;&nbsp;
-                <a class="btn btn-default" href="{{ route('node', ['act' => 'del']) }}">{{ lang('delete') }}</a>&nbsp;&nbsp;
+                <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}" />
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="check-all" />{{ lang('select all') }}
+                </label>&nbsp;&nbsp;
+                <a class="btn btn-default btn-sm" href="javascript:;" onclick="batchDel('{{ url('admin/node') }}')">{{ lang('delete') }}</a>&nbsp;&nbsp;
+                <span>
                 {{ lang('move to') }}
-                <select class="form-control">
+                <select name="_parent" onchange="batchUpdate(this, '{{ url('admin/node/batch') }}')">
                     @forelse($nodes as $node)
                         <option value="{{ $node->id }}">{{ $node->name }}</option>
                         @foreach($node->children as $snode)
@@ -35,6 +31,7 @@
                         <option value="0">{{ lang('no data') }}</option>
                     @endforelse
                 </select>
+                </span>
             </td>
         </tr>
         <tr>
@@ -45,7 +42,7 @@
             <th>{{ lang('operate') }}</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="check-trace">
         @forelse($nodes as $node)
         <tr>
             <td><input type="checkbox" class="checkbox" /></td>
@@ -69,7 +66,7 @@
                         <td>{{ $snode->path }}</td>
                         <td>
                             <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'edit', 'id' => $snode->id]) }}">{{ lang('edit') }}</a>
-                            <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'del', 'id' => $snode->id) }}">{{ lang('delete') }}</a>
+                            <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'del', 'id' => $snode->id]) }}">{{ lang('delete') }}</a>
                         </td>
                     </tr>
                     <!-- sub node -->

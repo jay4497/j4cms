@@ -36,6 +36,7 @@ return [
     'show feedback' => '留言详情',
     'feedback list' => '留言列表',
     'others' => '其它',
+    'title' => '标题',
 
     'node name' => '栏目名称',
     'node path' => '栏目目录',

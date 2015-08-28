@@ -17,7 +17,7 @@ class FeedBackController extends Controller
      */
     public function getIndex()
     {
-        $feedbacks = FeedBack::all();
+        $feedbacks = FeedBack::paginate(15);
         return view('admin.feedback.index', compact('feedbacks'));
     }
 
@@ -56,6 +56,34 @@ class FeedBackController extends Controller
         }else{
             return redirect('admin/feedback?from=update&status=failed');
         }
+    }
+
+    public function postBatch($act = 'update'){
+        $result = false;
+        switch($act){
+            case 'delete':
+                $ids = \Request::input('ids');
+                $idsArr = explode(',', $ids);
+                $result = FeedBack::whereIn('id', $idsArr)->delete();
+                break;
+            case 'update':
+                $key = \Request::input('key');
+                $val = \Request::input('value');
+                $key = $key == '_status'? 'status': '';
+                if(!empty($key)){
+                    $ids = \Request::input('ids');
+                    $idsArr = explode(',', $ids);
+                    $result = FeedBack::whereIn('id', $idsArr)->update([$key => $val]);
+                }
+                break;
+        }
+        $msg = [];
+        if($result){
+            $msg['status'] = 'success';
+        }else{
+            $msg['status'] = 'failed';
+        }
+        return response(json_encode($msg))->header('Content-Type', 'application/json');
     }
 
     /**

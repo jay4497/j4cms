@@ -4,17 +4,102 @@ $(document).ready(function(){
         $(this).siblings('.nav').slideDown();
     });
 
-    $('#collapseMenu').toggle(
-        function(){
-            $('.admin-menu').removeClass('hidden-xs', 'hidden-sm');
-            $('.admin-menu').hide();
-            $('.admin-menu').addClass('.coverMenu');
-            $('.admin-menu').slideDown();
-        },
-        function(){
-            $('.admin-menu').removeClass('.coverMenu');
-            $('.admin-menu').slideUp();
-            $('.admin-menu').addClass('hidden-xs', 'hidden-sm');
+    $('#collapse-menu').click(function(){
+            var obj = $('.admin-menu');
+            if(obj.hasClass('hidden-xs')) {
+                obj.removeClass('hidden-xs hidden-sm');
+                obj.hide();
+                obj.addClass('coverMenu');
+                obj.slideDown();
+            }else{
+                obj.slideUp();
+                obj.removeClass('coverMenu');
+                obj.addClass('hidden-xs hidden-sm');
+            }
+    });
+
+    $('#check-all').click(function(){
+        if($(this).prop('checked')){
+            $('#checkTrace .check').prop('checked', true);
+        }else{
+            $('#checkTrace .check').prop('checked', false);
         }
-    );
+    });
 });
+var csrf_token = $('#csrf_token').val();
+function batchDel(url){
+    var ids = '';
+    $('#check-trace .check').each(function() {
+        if ($(this).prop('checked')) {
+            ids += $(this).val() + ',';
+        }
+    });
+    if(ids == ''){
+        alert('no one checked');
+        return;
+    }
+    ids = ids.substr(0, ids.length - 1);
+    url = url + '/delete';
+    $.ajax({
+        url: url,
+        async: false,
+        cache: false,
+        type: 'POST',
+        data: { ids: ids, _token: csrf_token },
+        success: function(e){
+            var re;
+            try{
+                re = $.parseJSON(e);
+            }catch(err){
+                re = null;
+            }
+            if(re == null || re.status == 'failed'){
+                alert('failed');
+            }else{
+                alert('success');
+            }
+        },
+        error: function(e,err){
+            alert('request error');
+        }
+    });
+}
+
+function batchUpdate(sender, url){
+    var key = $(sender).attr('name');
+    var val = $(sender).val();
+    var ids = '';
+    $('#check-trace .check').each(function() {
+        if ($(this).prop('checked')) {
+            ids += $(this).val() + ',';
+        }
+    });
+    if(ids == ''){
+        alert('no one checked');
+        return;
+    }
+    ids = ids.substr(0, ids.length - 1);
+    $.ajax({
+        url: url,
+        async: false,
+        cache: false,
+        type: 'POST',
+        data: { ids: ids, key: key, value: val, _token: csrf_token },
+        success: function(e){
+            var re;
+            try{
+                re = $.parseJSON(e);
+            }catch(err){
+                re = null;
+            }
+            if(re == null || re.status == 'failed'){
+                alert('failed');
+            }else{
+                alert('success');
+            }
+        },
+        error: function(e, err){
+            alert('request error');
+        }
+    });
+}

@@ -14,3 +14,16 @@ function nodeChainStr($chain){
     $result = trim($result, '>');
     return $result;
 }
+
+function getDepth($parent_id){
+    $depth = 0;
+    $thread = '/';
+    if($parent_id > 0){
+        $parent = App\Node::find($parent_id);
+        if($parent){
+            $depth = $parent->depth + 1;
+            $thread = $parent->thread.$parent_id.'/';
+        }
+    }
+    return ['depth' => $depth, 'thread' => $thread];
+}

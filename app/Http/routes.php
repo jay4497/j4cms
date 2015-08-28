@@ -26,3 +26,5 @@ Route::controller('admin/article', 'Admin\ArticleController');
 Route::controller('admin/link', 'Admin\LinkController');
 // feedback
 Route::controller('admin/feedback', 'Admin\FeedBackController');
+// ad
+Route::controller('admin/ad', 'Admin\AdController');

@@ -53,6 +53,24 @@ class LinkController extends Controller
         }
     }
 
+    public function postBatch($act = 'update'){
+        $result = false;
+        switch($act){
+            case 'delete':
+                $ids = \Request::input('ids');
+                $idsArr = explode(',', $ids);
+                $result = Link::whereIn('id', $idsArr)->delete();
+                break;
+        }
+        $msg = [];
+        if($result){
+            $msg['status'] = 'success';
+        }else{
+            $msg['status'] = 'failed';
+        }
+        return response(json_encode($msg))->header('Content-Type', 'application/json');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -50,11 +50,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="order" class="control-label col-sm-2">{{ lang('orderby' }}</label>
+                <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="order" name="order" value="{{ isset($ad)? $ad->order: old('order') }}" />
                 </div>
             </div>
+            {{ csrf_field() }}
             <button type="submit" class="btn btn-primary">{{ lang('submit') }}</button>
         </form>
     </div>

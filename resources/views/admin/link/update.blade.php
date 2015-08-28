@@ -36,6 +36,7 @@
                     <input type="text" class="form-control" id="order" name="order" value="{{ isset($link)? $link->order: old('order') }}" />
                 </div>
             </div>
+            {{ csrf_field() }}
             <button type="submit" class="btn btn-primary">{{ lang('submit') }}</button>
         </form>
     </div>

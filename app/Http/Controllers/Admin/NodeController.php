@@ -19,7 +19,7 @@ class NodeController extends Controller
     public function getIndex()
     {
         $nodes = Node::Top()->get();
-        return view('admin.node', compact('nodes'));
+        return view('admin.node.index', compact('nodes'));
     }
 
     public function getUpdate($act, $id = 0){
@@ -65,6 +65,40 @@ class NodeController extends Controller
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }
+    }
+
+    public function postBatch($act = 'update'){
+        $result = false;
+        switch($act){
+            case 'delete':
+                $ids = \Request::input('ids');
+                $idsArr = explode(',', $ids);
+                $result = Node::whereIn('id', $idsArr)->delete();
+                break;
+            case 'update':
+                $key = \Request::input('key');
+                $key = $key == '_parent'? 'parent_id': '';
+                if(!empty($key)){
+                    $val = \Request::input('value');
+                    $ids = \Request::input('ids');
+                    $idsArr = explode(',', $ids);
+                    $dpt = $this->getDepth($val);
+                    $data = [
+                        $key => $val,
+                        'depth' => $dpt['depth'],
+                        'thread' => $dpt['thread']
+                    ];
+                    $result = Node::whereIn('id', $idsArr)->update($data);
+                }
+                break;
+        }
+        $msg = [];
+        if($result){
+            $msg['status'] = 'success';
+        }else{
+            $msg['status'] = 'failed';
+        }
+        return response(json_encode($msg))->header('Content-Type', 'application/json');
     }
 
     private function getDepth($parent_id){

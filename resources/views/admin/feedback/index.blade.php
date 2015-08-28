@@ -6,18 +6,27 @@
     <div class="panel-body">
         @include('layouts.info')
         <p>
-            <input type="checkbox" />{{ lang('select all') }}
-            <a class="btn btn-default" href="javascript:;">{{ lang('delete') }}</a>
-            {{ lang('mark to') }}
-            <select>
-                <option value="1">{{ lang('have read') }}</option>
-                <option value="0">{{ lang('not read') }}</option>
-                <option value="2">{{ lang('hidden') }}</option>
-            </select>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <a href="{{ action('Admin\FeedBackController@getUpdate', ['act' => 'add']) }}">{{ lang('feedback add') }}</a>
         </p>
     </div>
     <table class="table">
         <thead>
+        <tr>
+            <td colspan="5">
+                <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}" />
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="check-all" />{{ lang('select all') }}
+                </label>&nbsp;&nbsp;
+                <a class="btn btn-default btn-sm" href="javascript:;" onclick="batchDel('{{ url('admin/feedback') }}')">{{ lang('delete') }}</a>&nbsp;&nbsp;
+                {{ lang('mark to') }}
+                <select name="_status" onchange="batchUpdate(this, '{{ url('admin/feedback/batch') }}')">
+                    <option value="1">{{ lang('have read') }}</option>
+                    <option value="0">{{ lang('not read') }}</option>
+                    <option value="2">{{ lang('hidden') }}</option>
+                </select>
+            </td>
+        </tr>
         <tr>
             <th></th>
             <th>{{ lang('title') }}</th>
@@ -26,10 +35,10 @@
             <th>{{ lang('operate') }}</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="check-trace">
         @forelse($feedbacks as $feedback)
             <tr>
-                <td><input type="checkbox" value="{{ $feedback->id }}" /></td>
+                <td><input type="checkbox" class="check" value="{{ $feedback->id }}" /></td>
                 <td><a href="">{{ $feedback->title }}</a></td>
                 <td>{{ $feedback->email }}</td>
                 <td>{{ $feedback->status }}</td>
