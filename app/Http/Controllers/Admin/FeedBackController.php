@@ -31,30 +31,15 @@ class FeedBackController extends Controller
     }
 
     public function getUpdate($act, $id){
-        $ids = $id;
-        if(str_contains($id, ',')){
-            $ids = explode(',', $id);
-        }
-        $query = FeedBack::whereIn('id', $ids);
         $result = false;
-        switch($act){
-            case "no":
-                $result = $query->update(['status' => 0]);
-                break;
-            case "readed":
-                $result = $query->update(['status' => 1]);
-                break;
-            case "hidden":
-                $result = $query->update(['status' => 2]);
-                break;
-            case "delete":
-                $result = $query->delete();
-                break;
+        $feedback = FeedBack::find($id);
+        if($feedback){
+            $result = $feedback->delete();
         }
         if($result){
-            return redirect('admin/feedback?from=update&status=success');
+            return redirect('admin/feedback?from=del&status=success');
         }else{
-            return redirect('admin/feedback?from=update&status=failed');
+            return redirect('admin/feedback?from=del&status=failed');
         }
     }
 

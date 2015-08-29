@@ -20,9 +20,9 @@ $(document).ready(function(){
 
     $('#check-all').click(function(){
         if($(this).prop('checked')){
-            $('#checkTrace .check').prop('checked', true);
+            $('#check-trace .check').prop('checked', true);
         }else{
-            $('#checkTrace .check').prop('checked', false);
+            $('#check-trace .check').prop('checked', false);
         }
     });
 });

@@ -17,29 +17,32 @@
             <a href="javascript:;">{{ lang('node manage') }}</a>
             <ul class="nav">
                 <li><a href="{{ url('admin/node') }}">{{ lang('node list') }}</a></li>
-                <li><a href="{{ url('admin/node/add') }}">{{ lang('node add') }}</a></li>
+                <li><a href="{{ url('admin/node/update/add') }}">{{ lang('node add') }}</a></li>
             </ul>
         </li>
         <li>
             <a href="javascript:;">{{ lang('nav manage') }}</a>
             <ul class="nav">
                 <li><a href="{{ url('admin/nav') }}">{{ lang('nav list') }}</a></li>
-                <li><a href="{{ url('admin/nav/add') }}">{{ lang('nav add') }}</a></li>
+                <li><a href="{{ url('admin/nav/update/add') }}">{{ lang('nav add') }}</a></li>
             </ul>
         </li>
         <li>
             <a href="javascript:;">{{ lang('article manage') }}</a>
             <ul class="nav">
-                <li></li>
+                <li><a href="{{ url('admin/article/index/1') }}">{{ lang('news list') }}</a></li>
+                <li><a href="{{ url('admin/article/update/1/add') }}">{{ lang('news add') }}</a></li>
+                <li><a href="{{ url('admin/article/index/2 }}">{{ lang('product list') }}</a></li>
+                <li><a href="{{ url('admin/article/update/2/add') }}">{{ lang('product add') }}</a></li>
             </ul>
         </li>
         <li>
             <a href="javascript:;">{{ lang('others') }}</a>
             <ul class="nav">
                 <li><a href="{{ url('admin/ad') }}">{{ lang('ad list') }}</a></li>
-                <li><a href="{{ url('admin/ad/add') }}">{{ lang('ad add') }}</a></li>
+                <li><a href="{{ url('admin/ad/update/add') }}">{{ lang('ad add') }}</a></li>
                 <li><a href="{{ url('admin/link') }}">{{ lang('link list') }}</a></li>
-                <li><a href="{{ url('admin/link/add') }}">{{ lang('link add') }}</a></li>
+                <li><a href="{{ url('admin/link/update/add') }}">{{ lang('link add') }}</a></li>
                 <li><a href="{{ url('admin/feedback') }}">{{ lang('feedback list') }}</a></li>
                 <li><a href="{{ url('admin/user') }}">{{ lang('user list') }}</a></li>
             </ul>

@@ -18,7 +18,7 @@
                 <label class="checkbox-inline">
                     <input type="checkbox" id="check-all" />{{ lang('select all') }}
                 </label>&nbsp;&nbsp;
-                <a class="btn btn-default btn-sm" href="javascript:;" onclick="batchDel('{{ url('admin/article') }}')">{{ lang('delete') }}</a>&nbsp;&nbsp;
+                <a class="btn btn-default btn-sm" href="javascript:;" onclick="batchDel('{{ url('admin/article/batch') }}')">{{ lang('delete') }}</a>&nbsp;&nbsp;
                 <span>
                 {{ lang('move to') }}
                 <select name="_node" onchange="batchUpdate(this, '{{ url('admin/article/batch') }}')">
@@ -34,11 +34,11 @@
                 </select>&nbsp;&nbsp;
                 {{ lang('mark to') }}
                 <select name="_status" onchange="batchUpdate(this, '{{ url('admin/article/batch') }}')">
-                    <option value="1">{{ lang('hidden') }}</option>
-                    <option value="2">{{ lang('show') }}</option>
-                    <option value="3">{{ lang('hot') }}</option>
-                    <option value="4">{{ lang('recommend') }}</option>
-                    <option value="5">{{ lang('show index') }}</option>
+                    <option value="0">{{ lang('hidden') }}</option>
+                    <option value="1">{{ lang('show') }}</option>
+                    <option value="2">{{ lang('hot') }}</option>
+                    <option value="3">{{ lang('recommend') }}</option>
+                    <option value="4">{{ lang('show index') }}</option>
                 </select>
                 </span>
             </td>

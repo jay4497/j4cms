@@ -64,6 +64,53 @@ class ArticleController extends Controller
         }
     }
 
+    public function postBatch($act = 'update'){
+        $result = false;
+        $ids = \Request::input('ids');
+        $idsArr = explode(',', $ids);
+        switch($act){
+            case 'delete':
+                $result = Article::whereIn('id', $idsArr)->delete();
+                break;
+            case 'update':
+                $key = \Request::input('key');
+                $value = \Request::input('value');
+                $tempData = $this->parseKey($key, $value);
+                $result = Article::whereIn('id', $idsArr)->update($tempData);
+                break;
+        }
+        $msg = [];
+        if($result){
+            $msg['status'] = 'success';
+        }else{
+            $msg['status'] = 'failed';
+        }
+        return response(json_encode($msg))->header('Content-Type', 'application/json');
+    }
+
+    private function parseKey($key, $val){
+        $result = [];
+        switch($key){
+            case '_status':
+                if($val == 1){
+                    $result['status'] = 1;
+                }elseif($val == 0){
+                    $result['status'] = 0;
+                }elseif($val == 2){
+                    $result['hot'] = 1;
+                }elseif($val == 3){
+                    $result['recommend'] = 1;
+                }elseif($val == 4){
+                    $result['show_index'] = 1;
+                }
+                break;
+            case '_node':
+                $result['node_id'] = $val;
+                break;
+        }
+        return $result;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

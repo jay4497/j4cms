@@ -45,7 +45,7 @@
         <tbody id="check-trace">
         @forelse($nodes as $node)
         <tr>
-            <td><input type="checkbox" class="checkbox" /></td>
+            <td><input type="checkbox" class="check" /></td>
             <td>{{ $node->id }}</td>
             <td>{{ $node->name }}({{ $node->order }})</td>
             <td>{{ $node->path }}</td>
@@ -60,7 +60,7 @@
                 <table class="table">
                     @forelse($node->children as $snode)
                     <tr>
-                        <td><input type="checkbox" class="checkbox" /></td>
+                        <td><input type="checkbox" class="check" /></td>
                         <td>{{ $snode->id }}</td>
                         <td>{{ $snode->name }}({{ $snode->order }})</td>
                         <td>{{ $snode->path }}</td>
@@ -75,7 +75,7 @@
                             <table class="table">
                                 @forelse($snode->children as $tnode)
                                 <tr>
-                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td><input type="checkbox" class="check" /></td>
                                     <td>{{ $tnode->id }}</td>
                                     <td>{{ $tnode->name }}({{ $tnode->order }})</td>
                                     <td>{{ $tnode->path }}</td>
