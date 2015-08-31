@@ -103,3 +103,18 @@ function batchUpdate(sender, url){
         }
     });
 }
+
+function imageUpload(id){
+    $.ajaxFileUpload({
+        url: '/resource/upload/image',
+        fileElementId: id,
+        dataType: 'json',
+        success: function(data, status){
+            $('#get-image').val(data.path);
+            $('\'#' + id + '\'').after('success');
+        },
+        error: function(e, err){
+            alert('request error');
+        }
+    });
+}

@@ -34,6 +34,12 @@ gulp.task('less', function(){
      .pipe(gulp.dest('public/assets/css'));
 });
 
+gulp.task('ajaxupload', function(){
+    return gulp.src('resources/assets/js/ajaxfileupload.js')
+        .pipe(minifyCss())
+        .pipe(gulp.dest('public/assets/js'));
+});
+
 gulp.task('minjs', function(){
  return gulp.src('resources/assets/js/*.js')
      .pipe(minjs())
