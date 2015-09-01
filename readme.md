@@ -1,4 +1,4 @@
-** being developing **
+**being developing**
 ## A Simple CMS Based Laravel
 
 ### License
