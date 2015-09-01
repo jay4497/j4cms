@@ -32,7 +32,7 @@
             <ul class="nav">
                 <li><a href="{{ url('admin/article/index/1') }}">{{ lang('news list') }}</a></li>
                 <li><a href="{{ url('admin/article/update/1/add') }}">{{ lang('news add') }}</a></li>
-                <li><a href="{{ url('admin/article/index/2 }}">{{ lang('product list') }}</a></li>
+                <li><a href="{{ url('admin/article/index/2') }}">{{ lang('product list') }}</a></li>
                 <li><a href="{{ url('admin/article/update/2/add') }}">{{ lang('product add') }}</a></li>
             </ul>
         </li>
@@ -58,6 +58,7 @@
 </div>
 </div>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/ajaxfileupload.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/admin/js/admin.js') }}"></script>
 </body>
 </html>

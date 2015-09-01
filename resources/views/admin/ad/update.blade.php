@@ -31,7 +31,11 @@
             <div class="form-group">
                 <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
                 <div class="col-sm-3">
-                    <input class="form-control" type="file" id="image" name="image" value="{{ isset($ad)? $ad->image: old('image') }}" />
+                    <input class="form-control" type="file" id="image" name="image" />
+                    <input type="hidden" id="get-image" value="{{ isset($ad)? $ad->image: old('image') }}" />
+                </div>
+                <div class="col-sm-7">
+                    <iframe style="width:100%;height:34px;" src="{{ url('rs/upload') }}"></iframe>
                 </div>
             </div>
             <div class="form-group">

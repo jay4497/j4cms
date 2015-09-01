@@ -14,6 +14,10 @@ class ResourceController extends Controller
 
     }
 
+    public function getUpload(){
+        return view('layouts.upload');
+    }
+
     public function postUpload($type){
         $result = [];
         if(!\Request::hasFile()){
@@ -25,7 +29,7 @@ class ResourceController extends Controller
         switch($type){
             case 'image':
                 $img = new J4Image();
-                $result = $img->upload($files, 'images');
+                $result = $img->upload($files, 'assets/images/upload');
               break;
         }
         return response(json_encode($result))->header('Content-Type', 'application/json');

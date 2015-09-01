@@ -30,3 +30,6 @@ Route::controller('admin/feedback', 'Admin\FeedBackController');
 Route::controller('admin/ad', 'Admin\AdController');
 // user
 Route::controller('admin/user', 'Admin\UserController');
+
+/** resources */
+Route::controller('rs', 'ResourceController');

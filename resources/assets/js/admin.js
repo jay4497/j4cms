@@ -104,13 +104,14 @@ function batchUpdate(sender, url){
     });
 }
 
-function imageUpload(id){
+function imageUpload(id, url){
+    alert(url);
     $.ajaxFileUpload({
-        url: '/resource/upload/image',
+        url: url,
         fileElementId: id,
         dataType: 'json',
         success: function(data, status){
-            $('#get-image').val(data.path);
+            $('#get-image').val(data.image);
             $('\'#' + id + '\'').after('success');
         },
         error: function(e, err){
