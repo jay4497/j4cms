@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use \Image;
+use J4\Upload\J4Image;
 
 class ResourceController extends Controller
 {
@@ -17,14 +17,18 @@ class ResourceController extends Controller
     public function postUpload($type){
         $result = [];
         if(!\Request::hasFile()){
+            $result['status'] = 'failed';
             $result['msg'] = 'no file';
             return response(json_encode($result))->header('Content-Type', 'application/json');
         }
+        $files = \Request::file();
         switch($type){
             case 'image':
-
+                $img = new J4Image();
+                $result = $img->upload($files, 'images');
               break;
         }
+        return response(json_encode($result))->header('Content-Type', 'application/json');
     }
 
     /**

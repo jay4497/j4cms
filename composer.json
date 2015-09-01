@@ -25,7 +25,8 @@
             "app/J4/helper.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "J4\\": "app/J4"
         }
     },
     "autoload-dev": {

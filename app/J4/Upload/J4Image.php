@@ -1,9 +1,8 @@
 <?php
 
-namespace J4\Libs;
+namespace J4\Upload;
 
 use \Image;
-use \Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class J4Image{
@@ -15,10 +14,10 @@ class J4Image{
 
     public function __construct($watermark = null){
         $this->setWaterMark($watermark);
-        return $this;
     }
 
-    public function setWaterMark($path){
+    public function setWaterMark($path = null){
+        $path = $path ? $path: config('j4.waterMark');
         $this->watermark = Image::make($path);
         return $this;
     }
@@ -42,9 +41,24 @@ class J4Image{
 
     public function upload($files, $path, $reset = true, $addwatermark = true){
         $result = [];
-        $this->images = $files;
         if($files instanceof UploadedFile){
             array_push($this->images, $files);
+        }else{
+            $this->images = $files;
+        }
+        foreach($this->images as $image){
+            $ext = $image->getClientOriginalExtension();
+            $size = $image->getClientSize();
+            if(!in_array($ext, config('j4.allowImageType'))){
+                $result['status'] = 'failed';
+                $result['msg'] = 'invalid format';
+                return $result;
+            }
+            if($size > config('j4.maxImageSize')){
+                $result['status'] = 'failed';
+                $result['msg'] = 'invalid size';
+                return $result;
+            }
         }
 
         $path = trim($path, '/');
@@ -78,7 +92,7 @@ class J4Image{
             $num++;
         }
         $result['image'] = $dbimage;
-        return json_encode($result);
+        return $result;
     }
 
     public function addWaterMark($image, $watermark){
