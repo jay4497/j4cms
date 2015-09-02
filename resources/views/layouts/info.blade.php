@@ -1,5 +1,5 @@
 @if(\Request::has('from'))
-<p class="bg-info">
+<p class="bg-info" id="form-tip">
     @if(\Request::input('from') == 'del')
         @if(\Request::input('status') == 'success')
         {{ lang('delete success') }}

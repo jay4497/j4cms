@@ -13,7 +13,7 @@ class J4Image{
     protected $savepath;
 
     public function __construct($watermark = null){
-        $this->setWaterMark($watermark);
+        // $this->setWaterMark($watermark);
     }
 
     public function setWaterMark($path = null){
@@ -27,8 +27,9 @@ class J4Image{
             $this->savepath = public_path($filename);
             return $this;
         }
+        $ext = substr($filename, strrpos($filename, '.'));
         $randstr = strtolower(str_random(7));
-        $newFileName = $randstr.time();
+        $newFileName = $randstr.time().$ext;
         $index = (int) strripos(trim($filename, '/'), '/');
         if($index == 0){
             $this->savepath = public_path($newFileName);

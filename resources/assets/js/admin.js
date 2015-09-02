@@ -25,6 +25,10 @@ $(document).ready(function(){
             $('#check-trace .check').prop('checked', false);
         }
     });
+
+    if($('#form-tip') != null){
+        window.setTimeout('$("#form-tip").fadeOut()', 4000);
+    }
 });
 var csrf_token = $('#csrf_token').val();
 function batchDel(url){
@@ -105,17 +109,23 @@ function batchUpdate(sender, url){
 }
 
 function imageUpload(id, url){
-    alert(url);
-    $.ajaxFileUpload({
-        url: url,
-        fileElementId: id,
-        dataType: 'json',
-        success: function(data, status){
-            $('#get-image').val(data.image);
-            $('\'#' + id + '\'').after('success');
+    $.ajaxfileupload({
+        'action': url,
+        'file_id': id,
+        'params': { '_token': csrf_token },
+        'onComplete': function(res){
+            var msg = '';
+            if(res.status = 'success') {
+                $('#get-image').val(res.image);
+                msg = 'success';
+            }else{
+                msg = res.msg;
+            }
+            $('#upload_status').remove();
+            $('#' + id).after('<span id="upload_status">' + msg + '</span>');
         },
-        error: function(e, err){
-            alert('request error');
+        'onCancel': function(){
+            $('#' + id).after('<span id="upload_status">no file selected</span>');
         }
     });
 }

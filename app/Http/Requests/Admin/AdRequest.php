@@ -14,8 +14,9 @@ class AdRequest extends Request
     public function authorize()
     {
         if(auth()->guest()){
-            return false;
+            //return false;
         }
+        return true;
     }
 
     /**

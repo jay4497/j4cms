@@ -45,10 +45,11 @@ class AdController extends Controller
         $ad->description = $request->input('description');
         $ad->url = $request->input('url');
         $ad->type = $request->input('type');
-        $ad->image = $request->input('image');
+        $ad->image = $request->input('get_image');
         $ad->code = $request->input('code');
         $ad->width = $request->input('width');
         $ad->height = $request->input('height');
+        $ad->position_id = $request->input('position_id');
         $ad->order = $request->input('order');
         if($ad->save()){
             return redirect('admin/ad?from=update&status=success');

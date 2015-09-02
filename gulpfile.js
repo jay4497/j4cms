@@ -35,8 +35,8 @@ gulp.task('less', function(){
 });
 
 gulp.task('ajaxupload', function(){
-    return gulp.src('resources/assets/js/ajaxfileupload.js')
-        .pipe(minifyCss())
+    return gulp.src('resources/assets/js/jquery.ajaxfileupload.js')
+        .pipe(minjs())
         .pipe(gulp.dest('public/assets/js'));
 });
 

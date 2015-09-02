@@ -5,11 +5,11 @@ return [
 
     'allowFileType' => ['rar', 'zip', 'doc', 'docx', 'xlsx', 'xls', 'ppt', 'pptx', 'txt'],
 
-    'maxImageSize' => 5,
+    'maxImageSize' => 5000000,
 
     'maxFileSize' => 20,
 
-    'waterMark' => public_path('assets/image/watermark.png'),
+    'waterMark' => public_path('assets/images/watermark.png'),
 
     'show_type' => [
         1 => 'index',

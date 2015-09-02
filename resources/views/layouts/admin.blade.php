@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ lang('cms admin') }}</title>
 <link href="{{ asset('assets/admin/css/admin.css') }}" rel="stylesheet" type="text/css" />
@@ -58,7 +59,7 @@
 </div>
 </div>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/ajaxfileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery.ajaxfileupload.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/admin/js/admin.js') }}"></script>
 </body>
 </html>

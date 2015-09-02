@@ -20,7 +20,7 @@ class ResourceController extends Controller
 
     public function postUpload($type){
         $result = [];
-        if(!\Request::hasFile()){
+        if(count($_FILES) <= 0){
             $result['status'] = 'failed';
             $result['msg'] = 'no file';
             return response(json_encode($result))->header('Content-Type', 'application/json');
@@ -29,7 +29,7 @@ class ResourceController extends Controller
         switch($type){
             case 'image':
                 $img = new J4Image();
-                $result = $img->upload($files, 'assets/images/upload');
+                $result = $img->upload($files, 'assets/images/upload', true, false);
               break;
         }
         return response(json_encode($result))->header('Content-Type', 'application/json');
