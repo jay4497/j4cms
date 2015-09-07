@@ -52,9 +52,9 @@
         <tr>
             <th></th>
             <th>id</th>
-            <th>{{ lang('article title') }}({{ lang('orderby') }})</th>
-            <th>{{ lang('article node') }}</th>
-            <th>{{ lang('article status') }}</th>
+            <th>{{ lang('title') }}({{ lang('orderby') }})</th>
+            <th>{{ lang('node') }}</th>
+            <th>{{ lang('status') }}</th>
             <th>{{ lang('operate') }}</th>
         </tr>
         </thead>

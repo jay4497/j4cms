@@ -83,7 +83,7 @@
             <div class="form-group">
                 <label for="content" class="control-label col-sm-2">{{ lang('content') }}</label>
                 <div class="col-sm-9">
-                <textarea id="content" name="content">{{ isset($node)? $node->content: old('content') }}</textarea>
+                <textarea class="form-control" id="content" name="content">{{ isset($node)? $node->content: old('content') }}</textarea>
                 </div>
             </div>
             <div class="form-group">

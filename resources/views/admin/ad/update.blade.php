@@ -23,7 +23,7 @@
                 <div class="col-sm-3">
                     <select class="form-control" id="type" name="type">
                         @foreach(config('j4.ad_type') as $k => $v)
-                        <option value="{{ $k }}">{{ $v }}</option>
+                        <option value="{{ $k }}">{{ lang($v) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
                 <div class="col-sm-4">
-                    <input class="" type="file" id="image" name="image" />
+                    <input class="form-control" type="file" id="image" name="image" />
                     <input type="hidden" id="get-image" name="get_image" value="{{ isset($ad)? $ad->image: old('image') }}" />
                 </div>
                 <div class="col-sm-2">

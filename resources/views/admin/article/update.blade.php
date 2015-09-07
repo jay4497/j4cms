@@ -10,8 +10,8 @@
         <form class="form-horizontal" method="post" action="">
             <div class="form-group">
                 <label for="node" class="control-label col-sm-2">{{ lang('node') }}</label>
-                <div class="col-sm-9">
-                    <select id="node" name="node">
+                <div class="col-sm-3">
+                    <select class="form-control" id="node" name="node">
 
                     </select>
                 </div>
@@ -42,10 +42,10 @@
             </div>
             <div class="form-group">
                 <label for="type" class="control-label col-sm-2">{{ lang('ctype') }}</label>
-                <div class="col-sm-9">
-                    <select name="type" id="type">
+                <div class="col-sm-3">
+                    <select class="form-control" name="type" id="type">
                         @foreach(config('j4.content_type') as $k => $v)
-                        <option value="{{ $k }}">{{ $v }}</option>
+                        <option value="{{ $k }}">{{ lang($v) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -54,10 +54,10 @@
                 <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
                 <div class="col-sm-3">
                     <input type="file" class="form-control" id="image" name="image" />
-                    <input type="hidden" id="get-image" value="{{ $article->image }}" />
+                    <input type="hidden" id="get-image" value="" />
                 </div>
                 <div class="col-sm-2">
-                    <input type="button" class="btn btn-default" onclick="imageUpload('image', '{{ url('rs/upload/image') }}');" />
+                    <input type="button" class="btn btn-default" onclick="imageUpload('image', '{{ url('rs/upload/image') }}');" value="{{ lang('upload') }}" />
                 </div>
             </div>
             <div class="form-group">
@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
-                <div class="col-sm-9">
+                <div class="col-sm-3">
                     <input type="text" class="form-control" id="order" name="order" placeholder="{{ lang('input order') }}" />
                 </div>
             </div>
