@@ -5,10 +5,12 @@
     <div class="panel-heading">{{ lang('feedback manage') }}</div>
     <div class="panel-body">
         @include('layouts.info')
-        <p>
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <a href="{{ action('Admin\FeedBackController@getUpdate', ['act' => 'add']) }}">{{ lang('feedback add') }}</a>
-        </p>
+        <form class="form-inline" method="get" action="">
+            <div class="form-group">
+                <input type="text" class="form-control" name="key" id="key" placeholder="{{ lang('search key') }}" />
+            </div>
+            <button type="submit" class="btn btn-sm btn-default">{{ lang('search') }}</button>
+        </form>
     </div>
     <table class="table">
         <thead>

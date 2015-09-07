@@ -51,6 +51,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
+                <div class="col-sm-3">
+                    <input type="file" class="form-control" id="image" name="image" />
+                    <input type="hidden" id="get-image" value="{{ $article->image }}" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" class="btn btn-default" onclick="imageUpload('image', '{{ url('rs/upload/image') }}');" />
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="outline" class="control-label col-sm-2">{{ lang('outline') }}</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" id="outline" name="outline"></textarea>
@@ -85,7 +95,7 @@
                     <input type="text" class="form-control" id="order" name="order" placeholder="{{ lang('input order') }}" />
                 </div>
             </div>
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" id="csrf_token" value="{{ csrf_token() }}" />
             <button class="btn btn-primary" type="submit">{{ lang('submit') }}</button>
         </form>
     </div>

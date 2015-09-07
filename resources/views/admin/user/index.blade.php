@@ -5,6 +5,16 @@
     <div class="panel-heading">{{ lang('user manage') }}</div>
     <div class="panel-body">
         @include('layouts.info')
+        <p>
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <a href="{{ action('Admin\UserController@getUpdate', ['act' => 'add']) }}">{{ lang('user add') }}</a>
+        </p>
+        <form class="form-inline" method="get" action="">
+            <div class="form-group">
+                <input type="text" class="form-control" name="key" id="key" placeholder="{{ lang('search key') }}" />
+            </div>
+            <button type="submit" class="btn btn-sm btn-default">{{ lang('search') }}</button>
+        </form>
     </div>
     <table class="table">
         <thead>
@@ -24,8 +34,8 @@
             <td>{{ $user->phone }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                <a href="">{{ lang('edit') }}</a>
-                <a href="">{{ lang('delete') }}</a>
+                <a href="{{ action('Admin\UserController@getUpdate', ['act' => 'edit', 'id' => $user->id]) }}">{{ lang('edit') }}</a>
+                <a href="{{ action('Admin\UserController@getUpdate', ['act' => 'delete', 'id' => $user->id]) }}">{{ lang('delete') }}</a>
             </td>
         </tr>
         @endforeach

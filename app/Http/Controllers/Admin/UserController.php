@@ -18,6 +18,10 @@ class UserController extends Controller
     public function getIndex()
     {
         $users = User::paginate(15);
+        if(\Request::has('key')){
+            $key = \Request::input('key');
+            $users = User::where('name', 'like', '%'.$key.'%')->paginate(15);
+        }
         return view('admin.user.index', compact('users'));
     }
 

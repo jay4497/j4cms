@@ -18,6 +18,12 @@ class AdController extends Controller
     public function getIndex()
     {
         $ads = Ad::paginate(15);
+        if(\Request::has('key')){
+            $key = \Request::input('key');
+            if(!empty($key)){
+                $ads = Ad::where('title', 'like', '%'.$key.'%')->paginate(15);
+            }
+        }
         return view('admin.ad.index', compact('ads'));
     }
 

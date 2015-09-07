@@ -30,7 +30,7 @@
                     <input type="email" class="form-control" id="email" name="email" value="{{ isset($user)? $user->email: old('email') }}" />
                 </div>
             </div>
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" id="csrf_token" value="{{ csrf_token() }}" />
             <button type="submit" class="btn btn-primary">{{ lang('submit') }}</button>
         </form>
     </div>

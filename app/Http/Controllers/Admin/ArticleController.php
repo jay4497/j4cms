@@ -19,6 +19,10 @@ class ArticleController extends Controller
     {
         $articles = Article::group($type)->paginate(15);
         $nodes = \App\Node::top()->where('content_type', $type)->get();
+        if(\Request::has('key')){
+            $key = \Request::input('key');
+            $articles = Article::where('title', 'like', '%'.$key.'%')->paginate(15);
+        }
         return view('admin.article.index', compact('articles', 'nodes'));
     }
 

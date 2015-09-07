@@ -9,6 +9,12 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         <a href="{{ action('Admin\LinkController@getUpdate', ['act' => 'add']) }}">{{ lang('link add') }}</a>
     </p>
+    <form class="form-inline" method="get" action="">
+        <div class="form-group">
+            <input type="text" class="form-control" name="key" id="key" placeholder="{{ lang('search key') }}" />
+        </div>
+        <button type="submit" class="btn btn-sm btn-default">{{ lang('search') }}</button>
+    </form>
     </div>
     <table class="table">
         <thead>
@@ -37,8 +43,8 @@
             <td>{{ $link->url }}</td>
             <td><img src="{{ $link->image }}" /></td>
             <td>
-                <a href="">{{ lang('edit') }}</a>
-                <a href="">{{ lang('delete') }}</a>
+                <a href="{{ action('Admin\LinkController@getUpdate', ['act' => 'edit', 'id' => $link->id]) }}">{{ lang('edit') }}</a>
+                <a href="{{ action('Admin\LinkController@getUpdate', ['act' => 'delete', 'id' => $link->id]) }}">{{ lang('delete') }}</a>
             </td>
         </tr>
         @empty

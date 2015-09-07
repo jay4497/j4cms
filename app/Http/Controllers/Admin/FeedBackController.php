@@ -18,6 +18,10 @@ class FeedBackController extends Controller
     public function getIndex()
     {
         $feedbacks = FeedBack::paginate(15);
+        if(\Request::has('key')){
+            $key = \Request::input('key');
+            $feedbacks = FeedBack::where('title', 'like', '%'.$key.'%')->paginate(15);
+        }
         return view('admin.feedback.index', compact('feedbacks'));
     }
 

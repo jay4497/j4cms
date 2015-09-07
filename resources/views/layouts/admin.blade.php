@@ -31,10 +31,10 @@
         <li>
             <a href="javascript:;">{{ lang('article manage') }}</a>
             <ul class="nav">
-                <li><a href="{{ url('admin/article/index/1') }}">{{ lang('news list') }}</a></li>
-                <li><a href="{{ url('admin/article/update/1/add') }}">{{ lang('news add') }}</a></li>
-                <li><a href="{{ url('admin/article/index/2') }}">{{ lang('product list') }}</a></li>
-                <li><a href="{{ url('admin/article/update/2/add') }}">{{ lang('product add') }}</a></li>
+                <li><a href="{{ url('admin/article/index/2') }}">{{ lang('news list') }}</a></li>
+                <li><a href="{{ url('admin/article/update/2/add') }}">{{ lang('news add') }}</a></li>
+                <li><a href="{{ url('admin/article/index/1') }}">{{ lang('product list') }}</a></li>
+                <li><a href="{{ url('admin/article/update/1/add') }}">{{ lang('product add') }}</a></li>
             </ul>
         </li>
         <li>

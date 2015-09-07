@@ -18,6 +18,10 @@ class LinkController extends Controller
     public function getIndex()
     {
         $links = Link::sort()->get();
+        if(\Request::has('key')){
+            $key = \Request::input('key');
+            $links = Link::where('title', 'like', '%'.$key.'%')->sort()->get();
+        }
         return view('admin.link.index', compact('links'));
     }
 

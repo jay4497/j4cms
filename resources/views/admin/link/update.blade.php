@@ -26,8 +26,12 @@
             </div>
             <div class="form-group">
                 <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
-                <div class="col-sm-9">
-                    <input type="file" name="image" id="image" />
+                <div class="col-sm-3">
+                    <input type="file" class="form-control" name="image" id="image" />
+                    <input type="hidden" id="get-image" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" class="btn btn-sm btn-default" onclick="imageUpload('image', '{{ url('rs/upload/image') }}');" value="{{ lang('upload') }}" />
                 </div>
             </div>
             <div class="form-group">
@@ -36,7 +40,7 @@
                     <input type="text" class="form-control" id="order" name="order" value="{{ isset($link)? $link->order: old('order') }}" />
                 </div>
             </div>
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" id="csrf_token" value="{{ csrf_token() }}" />
             <button type="submit" class="btn btn-primary">{{ lang('submit') }}</button>
         </form>
     </div>
