@@ -97,4 +97,5 @@
         </form>
     </div>
 </div>
+@include('layouts.editor')
 @stop
