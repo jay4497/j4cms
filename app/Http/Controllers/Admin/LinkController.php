@@ -26,7 +26,7 @@ class LinkController extends Controller
     }
 
     public function getUpdate($act, $id = 0){
-        $link = null;
+        $link = new Link();
         if($act != 'add'){
             $link = Link::find($id);
             if($act == 'delete'){

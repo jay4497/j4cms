@@ -7,8 +7,10 @@ function lang($text){
 function nodeChainStr($chain){
     $result = '';
     foreach ($chain as $c) {
-        if($c instanceof App\Node){
+        if($c instanceof \App\Node){
             $result .= '>'.$c->name;
+        }else{
+            $result .= gettype($c).gettype($chain);
         }
     }
     $result = trim($result, '>');

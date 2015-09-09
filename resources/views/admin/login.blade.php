@@ -14,7 +14,8 @@
             {{ lang('login') }}
         </div>
         <div class="panel-body">
-        <form method="POST" action="{{ url('user/login') }}">
+        @include('layouts.error')
+        <form method="POST" action="{{ url('auth/login') }}">
             <div class="form-group">
                 <label class="sr-only">{{ lang('user name') }}</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="{{ lang('input name') }}" />
@@ -27,6 +28,7 @@
                 <label>
                     <input type="checkbox" class="checkbox" id="remember" name="remember">
                     {{ lang('remember me') }}
+                    {{ csrf_field() }}
                 </label>
             </div>
             <button class="btn btn-primary" type="submit">{{ lang('login') }}</button>

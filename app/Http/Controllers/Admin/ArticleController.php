@@ -10,6 +10,10 @@ use App\Article;
 
 class ArticleController extends Controller
 {
+    public function __construct(){
+        $this->middleware('guest');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +31,11 @@ class ArticleController extends Controller
     }
 
     public function getUpdate($type, $act, $id = 0){
-        $article = null;
+        $nodes = \App\Node::top()->where('content_type', $type)->get();
+        $article = new Article();
+        $flag = 0;
         if($act != 'add'){
+            $flag = 1;
             $article = Article::find($id);
             if($act == 'delete'){
                 $url = \Request::header('Referer');
@@ -39,7 +46,7 @@ class ArticleController extends Controller
                 }
             }
         }
-        return view('admin.article.update', compact('article'));
+        return view('admin.article.update', compact('flag', 'article', 'nodes'));
     }
 
     public function postUpdate(Requests\Admin\ArticleRequest $request, $type, $act, $id = 0){
@@ -62,12 +69,17 @@ class ArticleController extends Controller
         $article->recommend = $request->input('recommend')? 1: 0;
         $article->show_index = $request->input('show_index')? 1: 0;
         if($article->save()){
-            return redirect('admin/article/'.$type.'?from=update&status=success');
+            return redirect('admin/article/index/'.$type.'?from=update&status=success');
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }
     }
 
+    /**
+     * batch update
+     * @param string $act
+     * @return json
+     */
     public function postBatch($act = 'update'){
         $result = false;
         $ids = \Request::input('ids');
@@ -92,6 +104,12 @@ class ArticleController extends Controller
         return response(json_encode($msg))->header('Content-Type', 'application/json');
     }
 
+    /**
+     * get the flag data to update
+     * @param $key
+     * @param $val
+     * @return array
+     */
     private function parseKey($key, $val){
         $result = [];
         switch($key){

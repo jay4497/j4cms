@@ -20,6 +20,7 @@ return [
     'code' => '外链代码',
 
     'article manage' => '内容管理',
+    'add' => '添加',
     'nav manage' => '导航管理',
     'nav list' => '导航列表',
     'nav add' => '添加新导航',

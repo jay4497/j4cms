@@ -28,7 +28,7 @@ class AdController extends Controller
     }
 
     public function getUpdate($act, $id = 0){
-        $ad = null;
+        $ad = new Ad();
         if($act != 'add'){
             $ad = Ad::find($id);
             if($act == 'delete'){

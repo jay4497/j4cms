@@ -53,11 +53,11 @@ function batchDel(url){
         success: function(e){
             var re;
             try{
-                re = $.parseJSON(e);
+                re = e.status;
             }catch(err){
                 re = null;
             }
-            if(re == null || re.status == 'failed'){
+            if(re == null || re == 'failed'){
                 alert('failed');
             }else{
                 alert('success');
@@ -92,11 +92,11 @@ function batchUpdate(sender, url){
         success: function(e){
             var re;
             try{
-                re = $.parseJSON(e);
+                re = e.status;
             }catch(err){
                 re = null;
             }
-            if(re == null || re.status == 'failed'){
+            if(re == null || re == 'failed'){
                 alert('failed');
             }else{
                 alert('success');

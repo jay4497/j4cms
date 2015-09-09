@@ -35,16 +35,20 @@ class Node extends Model
         return $this->hasMany('\App\Article');
     }
 
-    public function chain($id){
-        $node = $this->find($id);
+    /**
+     * get the array of current node's parents and children
+     * @return array
+     */
+    public function chain()
+    {
         $nodeChain = [];
-        if($node){
-            $thread = trim($node->thread, '/');
-            $arr = explode('/', $thread);
-            foreach ($arr as $n) {
-                array_push($nodeChain, $this->find($n));
-            }
+        $thread = trim($this->thread, '/');
+        $arr = explode('/', $thread);
+        $arr = array_filter($arr);
+        foreach ($arr as $n) {
+            array_push($nodeChain, $this->find($n));
         }
+        array_push($nodeChain, $this);
         return $nodeChain;
     }
 

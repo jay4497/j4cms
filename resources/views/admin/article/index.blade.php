@@ -7,7 +7,7 @@
         @include('layouts.info')
         <p>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <a href="{{ action('Admin\ArticleController@getUpdate', ['act' => 'add']) }}">{{ lang('article add') }}</a>
+            <a href="{{ action('Admin\ArticleController@getUpdate', ['type' => \Request::route('one'), 'act' => 'add']) }}">{{ lang('article add') }}</a>
         </p>
         <form class="form-inline" method="get" action="">
             <div class="form-group">
@@ -62,18 +62,19 @@
         @forelse($articles as $article)
         <tr>
             <td><input type="checkbox" class="check" value="{{ $article->id }}" /> </td>
+            <td>{{ $article->id }}</td>
             <td>{{ $article->title }}({{ $article->order }})</td>
-            <td>{{ nodeChainStr($article->node->id) }}</td>
+            <td>{{ nodeChainStr($article->node->chain()) }}</td>
             <td>{{ $article->status }}</td>
             <td>
-                <a href="{{ action('Admin\ArticleController@getUpdate', ['act' => 'edit', 'id' => $article->id]) }}">{{ lang('edit') }}</a>
-                <a href="{{ action('Admin\ArticleController@getUpdate', ['act' => 'del', 'id' => $article->id]) }}">{{ lang('delete') }}</a>
+                <a href="{{ action('Admin\ArticleController@getUpdate', ['type' => \Request::route('one'), 'act' => 'edit', 'id' => $article->id]) }}">{{ lang('edit') }}</a>
+                <a href="{{ action('Admin\ArticleController@getUpdate', ['type' => \Request::route('one'), 'act' => 'del', 'id' => $article->id]) }}">{{ lang('delete') }}</a>
             </td>
         </tr>
         @empty
-        <tr><td colspan="5">{{ lang('no data') }}</td></tr>
+        <tr><td colspan="6">{{ lang('no data') }}</td></tr>
         @endforelse
-        <tr><td colspan="5">{{ $articles->render() }}</td></tr>
+        <tr><td colspan="6">{{ $articles->render() }}</td></tr>
         </tbody>
     </table>
 </div>

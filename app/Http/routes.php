@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 /*** Admin ***/
 Route::get('login', 'Admin\UserController@login');
+Route::controller('auth', 'Auth\AuthController');
 Route::get('admin', 'Admin\PageController@index');
 // node
 Route::controller('admin/node', 'Admin\NodeController');

@@ -16,6 +16,7 @@ class ArticleRequest extends Request
         if(auth()->guest()) {
             return false;
         }
+        return true;
     }
 
     /**

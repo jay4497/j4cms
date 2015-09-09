@@ -13,7 +13,7 @@ class LoginRequest extends Request
      */
     public function authorize()
     {
-        // return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class LoginRequest extends Request
     {
         return [
             'name' => 'required|exists:user,name',
-            'password' => 'required|min6'
+            'password' => 'required|min:5'
         ];
     }
 }

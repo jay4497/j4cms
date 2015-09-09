@@ -3,7 +3,7 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-heading">
-        {{ \Request::route('act') == 'add'? lang('article add'): lang('article edit') }}
+        {{ \Request::route('one') == 1? lang('product'): lang('news') }}{{ \Request::route('two') == 'add'? lang('add'): lang('edit') }}
     </div>
     <div class="panel-body">
         @include('layouts.error')
@@ -12,32 +12,40 @@
                 <label for="node" class="control-label col-sm-2">{{ lang('node') }}</label>
                 <div class="col-sm-3">
                     <select class="form-control" id="node" name="node">
-
+                        @foreach($nodes as $n)
+                        <option value="{{ $n->id }}">{{ $n->name }}</option>
+                            @foreach($n->children as $snode)
+                            <option value="{{ $snode->id }}">- {{ $snode->name }}</option>
+                                @foreach($snode->children as $tnode)
+                                    <option value="{{ $tnode->id }}">-- {{ $tnode->name }}</option>
+                                @endforeach
+                            @endforeach
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="title" class="control-label col-sm-2">{{ lang('title') }}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="title" name="title" value="{{ isset($article)? $article->title: old('title') }}" />
+                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title')? : $article->title }}" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="seo_title" class="control-label col-sm-2">{{ lang('seo title') }}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="seo_title" name="seo_title" value="{{ isset($article)?$article->seo_title: old('seo_title') }}" />
+                    <input type="text" class="form-control" id="seo_title" name="seo_title" value="{{ old('seo_title')? : $article->seo_title }}" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="description" class="control-label col-sm-2">{{ lang('description') }}</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control" id="description" name="description">{{ isset($article)?$article->descrition: old('description') }}</textarea>
+                    <textarea class="form-control" id="description" name="description">{{ old('description')? : $article->descrition }}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="keywords" class="control-label col-sm-2">{{ lang('keywords') }}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="keywords" name="keywords" value="{{ isset($article)?$article->keywords: old('keywords') }}" />
+                    <input type="text" class="form-control" id="keywords" name="keywords" value="{{ old('keywords')? : $article->keywords }}" />
                 </div>
             </div>
             <div class="form-group">
@@ -54,7 +62,7 @@
                 <label for="image" class="control-label col-sm-2">{{ lang('image') }}</label>
                 <div class="col-sm-3">
                     <input type="file" class="form-control" id="image" name="image" />
-                    <input type="hidden" id="get-image" value="" />
+                    <input type="hidden" name="get_image" id="get-image" value="{{ old('get_image')? : $article->image }}" />
                 </div>
                 <div class="col-sm-2">
                     <input type="button" class="btn btn-default" onclick="imageUpload('image', '{{ url('rs/upload/image') }}');" value="{{ lang('upload') }}" />
@@ -63,13 +71,13 @@
             <div class="form-group">
                 <label for="outline" class="control-label col-sm-2">{{ lang('outline') }}</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control" id="outline" name="outline"></textarea>
+                    <textarea class="form-control" id="outline" name="outline">{{ old('outline')? : $article->outline }}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="content" class="control-label col-sm-2">{{ lang('content') }}</label>
                 <div class="col-sm-9">
-                    <textarea id="content" name="content" class="form-control"></textarea>
+                    <textarea id="content" name="content" class="form-control">{{ old('content')? : $article->content }}</textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -92,7 +100,7 @@
             <div class="form-group">
                 <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="order" name="order" placeholder="{{ lang('input order') }}" />
+                    <input type="text" class="form-control" id="order" name="order" value="{{ old('order')? : $article->order }}" placeholder="{{ lang('input order') }}" />
                 </div>
             </div>
             <input type="hidden" name="_token" id="csrf_token" value="{{ csrf_token() }}" />

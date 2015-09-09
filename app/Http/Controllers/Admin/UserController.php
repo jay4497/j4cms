@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     public function getUpdate($act, $id = 0){
-        $user = null;
+        $user = new User();
         if($act != 'add'){
             $user = User::find($id);
             if($act == 'delete'){

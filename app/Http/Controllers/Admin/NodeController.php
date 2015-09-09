@@ -23,7 +23,7 @@ class NodeController extends Controller
     }
 
     public function getUpdate($act, $id = 0){
-        $node = null;
+        $node = new Node();
         if($act != 'add'){
             $node = Node::find($id);
             if($act == 'del'){
@@ -38,7 +38,7 @@ class NodeController extends Controller
         return view('admin.node.update', compact('node', 'nodes'));
     }
 
-    public function postUpdate($act, $id = 0, NodeRequest $request){
+    public function postUpdate(NodeRequest $request, $act, $id = 0){
         $node = new Node();
         if($act == 'edit'){
             $node = Node::find($id);
