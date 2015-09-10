@@ -30,14 +30,19 @@ class UserController extends Controller
         if($act != 'add'){
             $user = User::find($id);
             if($act == 'delete'){
+                $info = ['from' => 'del', 'status' => 'failed'];
                 // the user table cannot be empty
                 if(User::count() == 1){
-                    return redirect('admin/user?from=del&status=failed');
+                    j4flash($info);
+                    return redirect('admin/user');
                 }
                 if($user->delete()){
-                    return redirect('admin/user?from=del&status=success');
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect('admin/user');
                 }else{
-                    return redirect('admin/user?from=del&status=failed');
+                    j4flash($info);
+                    return redirect('admin/user');
                 }
             }
         }
@@ -54,7 +59,9 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = $request->input('password')? : $user->password;
         if($user->save()){
-            return redirect('admin/user?from=update&status=success');
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/user');
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }

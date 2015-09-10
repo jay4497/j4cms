@@ -30,10 +30,14 @@ class LinkController extends Controller
         if($act != 'add'){
             $link = Link::find($id);
             if($act == 'delete'){
+                $info = ['from' => 'del', 'status' => 'failed'];
                 if($link->delete()){
-                    return redirect('admin/link?from=del&status=success');
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect('admin/link');
                 }else{
-                    return redirect('admin/link?from=del&status=failed');
+                    j4flash($info);
+                    return redirect('admin/link');
                 }
             }
         }
@@ -47,11 +51,13 @@ class LinkController extends Controller
         }
         $link->title = $request->input('title');
         $link->description = $request->input('description');
-        $link->image = $request->input('image');
+        $link->image = $request->input('get_image');
         $link->url = $request->input('url');
         $link->order = $request->input('order');
         if($link->save()){
-            return redirect('admin/link?from=update&status=success');
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/link');
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }

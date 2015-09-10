@@ -27,10 +27,14 @@ class NodeController extends Controller
         if($act != 'add'){
             $node = Node::find($id);
             if($act == 'del'){
+                $info = ['from' => 'del', 'status' => 'failed'];
                 if($node->delete()){
-                    return redirect('admin/node?from=del&status=success');
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect('admin/node');
                 }else{
-                    return redirect('admin/node?from=del&status=failed');
+                    j4flash($info);
+                    return redirect('admin/node');
                 }
             }
         }
@@ -49,7 +53,7 @@ class NodeController extends Controller
         $node->name = $request->input('name');
         $node->description = $request->input('description');
         $node->keywords = $request->input('keywords');
-        $node->image = '';
+        $node->image = $request->input('get_image');
         $node->content = $request->input('content');
         $node->path = $request->input('path');
         $node->show_type = $request->input('show_type');
@@ -61,7 +65,9 @@ class NodeController extends Controller
         $node->depth = $dpt['depth'];
         $node->thread = $dpt['thread'];
         if($node->save()){
-            return redirect('admin/node')->with('info', 'success');
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/node');
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }

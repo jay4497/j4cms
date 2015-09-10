@@ -32,5 +32,5 @@ Route::controller('admin/ad', 'Admin\AdController');
 // user
 Route::controller('admin/user', 'Admin\UserController');
 
-/** resources */
+/** resources **/
 Route::controller('rs', 'ResourceController');

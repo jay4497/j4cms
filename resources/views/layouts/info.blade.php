@@ -1,19 +1,19 @@
-@if(\Request::has('from'))
+@if(\Session::has('from'))
 <p class="bg-info" id="form-tip">
-    @if(\Request::input('from') == 'del')
-        @if(\Request::input('status') == 'success')
+    @if(\Session::get('from') == 'del')
+        @if(\Session::get('status') == 'success')
         {{ lang('delete success') }}
         @else
         {{ lang('delete failed') }}
         @endif
-    @elseif(\Request::input('from') == 'update')
-        @if(\Request::input('status') == 'success')
+    @elseif(\Session::get('from') == 'update')
+        @if(\Session::get('status') == 'success')
         {{ lang('update success') }}
         @else
         {{ lang('update failed') }}
         @endif
-    @elseif(\Request::input('from') == 'show')
-        @if(\Request::input('status') == 'failed')
+    @elseif(\Session::get('from') == 'show')
+        @if(\Session::get('status') == 'failed')
         {{ lang('can not show') }}
         @endif
     @endif

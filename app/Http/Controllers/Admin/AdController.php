@@ -32,10 +32,14 @@ class AdController extends Controller
         if($act != 'add'){
             $ad = Ad::find($id);
             if($act == 'delete'){
+                $info = ['from' => 'del', 'status' => 'failed'];
                 if($ad->delete()){
-                    return redirect('admin/ad?from=del&status=success');
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect('admin/ad');
                 }else{
-                    return redirect('admin/ad?from=del&status=failed');
+                    j4flash($info);
+                    return redirect('admin/ad');
                 }
             }
         }
@@ -58,9 +62,11 @@ class AdController extends Controller
         $ad->position_id = $request->input('position_id');
         $ad->order = $request->input('order');
         if($ad->save()){
-            return redirect('admin/ad?from=update&status=success');
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/ad');
         }else{
-            return redirect('admin/ad?from=update&status=failed');
+            return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }
     }
 

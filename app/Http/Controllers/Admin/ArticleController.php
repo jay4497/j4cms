@@ -39,10 +39,14 @@ class ArticleController extends Controller
             $article = Article::find($id);
             if($act == 'delete'){
                 $url = \Request::header('Referer');
+                $info = ['from' => 'del', 'status' => 'failed'];
                 if($article->delete()){
-                    return redirect($url.'?from=del&status=success');
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect($url);
                 }else{
-                    return redirect($url.'?from=del&status=failed');
+                    j4flash($info);
+                    return redirect($url);
                 }
             }
         }
@@ -61,6 +65,7 @@ class ArticleController extends Controller
         $article->description = $request->input('description');
         $article->keywords = $request->input('keywords');
         $article->type = $request->input('type');
+        $article->image = $request->input('get_image');
         $article->outline = $request->input('outline')?: str_limit(strip_tags($request->input('content')));
         $article->content = $request->input('content');
         $article->order = $request->input('order');
@@ -69,7 +74,9 @@ class ArticleController extends Controller
         $article->recommend = $request->input('recommend')? 1: 0;
         $article->show_index = $request->input('show_index')? 1: 0;
         if($article->save()){
-            return redirect('admin/article/index/'.$type.'?from=update&status=success');
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/article/index/'.$type);
         }else{
             return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
         }

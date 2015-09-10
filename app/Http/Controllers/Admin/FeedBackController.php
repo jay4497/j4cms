@@ -40,10 +40,14 @@ class FeedBackController extends Controller
         if($feedback){
             $result = $feedback->delete();
         }
+        $info = ['from' => 'del', 'status' => 'failed'];
         if($result){
-            return redirect('admin/feedback?from=del&status=success');
+            $info['status'] = 'success';
+            j4flash($info);
+            return redirect('admin/feedback');
         }else{
-            return redirect('admin/feedback?from=del&status=failed');
+            j4flash($info);
+            return redirect('admin/feedback');
         }
     }
 

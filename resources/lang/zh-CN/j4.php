@@ -78,6 +78,8 @@ return [
     'hot' => '热门',
     'recommend' => '推荐',
     'show index' => '在首页显示',
+    'have read' => '已读',
+    'not read' => '未读',
     'edit' => '编辑',
     'delete' => '删除',
     'back' => '返回',
@@ -88,7 +90,7 @@ return [
     'status' => '状态',
 
     'no data' => '暂无数据',
-    'submit failed' => '发生错误，请重试',
+    'submit failed' => '发生未知错误',
     'delete success' => '删除成功',
     'delete failed' => '删除失败',
     'update success' => '更新成功',
