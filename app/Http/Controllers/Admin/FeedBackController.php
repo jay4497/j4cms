@@ -28,9 +28,15 @@ class FeedBackController extends Controller
     public function getShow($id){
         $feedback = FeedBack::find($id);
         if($feedback){
+            if($feedback->status == 0) {
+                $feedback->status = 1;
+            }
+            $feedback->save();
             return view('admin.feedback.show', compact('feedback'));
         }else{
-            return redirect('admin/feedback?from=show&status=failed');
+            $info = ['from' => 'show', 'status' => 'failed'];
+            j4flash($info);
+            return redirect('admin/feedback');
         }
     }
 

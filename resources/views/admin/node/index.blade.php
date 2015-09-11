@@ -10,7 +10,7 @@
             <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'add']) }}">{{ lang('node add') }}</a>
         </p>
     </div>
-    <table class="table">
+    <table class="table table-striped">
         <thead>
         <tr>
             <td colspan="5">
@@ -55,48 +55,7 @@
             </td>
         </tr>
         <!-- sub node -->
-        <tr>
-            <td colspan="5">
-                <table class="table">
-                    @forelse($node->children as $snode)
-                    <tr>
-                        <td><input type="checkbox" class="check" /></td>
-                        <td>{{ $snode->id }}</td>
-                        <td>{{ $snode->name }}({{ $snode->order }})</td>
-                        <td>{{ $snode->path }}</td>
-                        <td>
-                            <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'edit', 'id' => $snode->id]) }}">{{ lang('edit') }}</a>
-                            <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'del', 'id' => $snode->id]) }}">{{ lang('delete') }}</a>
-                        </td>
-                    </tr>
-                    <!-- sub node -->
-                    <tr>
-                        <td colspan="5">
-                            <table class="table">
-                                @forelse($snode->children as $tnode)
-                                <tr>
-                                    <td><input type="checkbox" class="check" /></td>
-                                    <td>{{ $tnode->id }}</td>
-                                    <td>{{ $tnode->name }}({{ $tnode->order }})</td>
-                                    <td>{{ $tnode->path }}</td>
-                                    <td>
-                                        <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'edit', 'id' => $tnode->id]) }}">{{ lang('edit') }}</a>
-                                        <a href="{{ action('Admin\NodeController@getUpdate', ['act' => 'del', 'id' => $tnode->id]) }}">{{ lang('delete') }}</a>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr><td>{{ lang('no data') }}</td> </tr>
-                                @endforelse
-                            </table>
-                        </td>
-                    </tr>
-                    <!-- end sub node -->
-                    @empty
-                    <tr><td>{{ lang('no data') }}</td></tr>
-                    @endforelse
-                </table>
-            </td>
-        </tr>
+        @include('layouts.node', ['node' => $node, 'cols' => 5])
         <!-- end sub node -->
         @empty
         <tr><td colspan="5">{{ lang('no data') }}</td></tr>
