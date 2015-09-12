@@ -47,7 +47,7 @@ class NodeController extends Controller
         if($act == 'edit'){
             $node = Node::find($id);
             if(!$node){
-                return redirect()->back()->withErrors(['err' => lang('unvalid node')])->withInput();
+                return redirect()->back()->withErrors(['err' => lang('invalid node')])->withInput();
             }
         }
         $node->name = $request->input('name');

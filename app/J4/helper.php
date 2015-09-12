@@ -23,7 +23,7 @@ function j4flash($data){
 }
 
 /**
- * Display the node's parent and children in the string
+ * Display the node's parent nodes in the string
  * @param array $chain
  * @return string
  */
@@ -41,7 +41,7 @@ function nodeChainStr($chain){
 }
 
 /**
- * Get the node's properties of depth & thread based on it's parent's id
+ * Get the node's properties of depth & thread based on id of it's parent node
  * @param $parent_id
  * @return array
  */

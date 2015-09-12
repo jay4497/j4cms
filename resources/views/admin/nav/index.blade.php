@@ -24,12 +24,15 @@
             <td>{{ $nav->title }}({{ $nav->order }})</td>
             <td>{{ $nav->url }}</td>
             <td>{{ $nav->node->name }}</td>
-            <td>{{ $nav->order }}</td>
+            <td>{{ $nav->status }}</td>
             <td>
-                <a href="">{{ lang('edit') }}</a>
-                <a href="">{{ lang('delete') }}</a>
+                <a href="{{ action('Admin\NavigateController@getUpdate', ['act' => 'edit', 'id' => $nav->id]) }}">{{ lang('edit') }}</a>
+                <a href="{{ action('Admin\NavigateController@getUpdate', ['act' => 'delete', 'id' => $nav->id]) }}">{{ lang('delete') }}</a>
             </td>
         </tr>
+        <!-- sub nav -->
+        @include('layouts.navigate', ['nav' => $nav])
+        <!-- end sub nav -->
         @empty
         <tr><td colspan="6">{{ lang('no data') }}</td></tr>
         @endforelse

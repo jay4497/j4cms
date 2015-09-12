@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Navigate;
+use App\Http\Requests\Admin\NavigateRequest;
 
 class NavigateController extends Controller
 {
@@ -14,9 +16,52 @@ class NavigateController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function getIndex()
     {
-        //
+        $navigates = Navigate::top()->get();
+        return view('admin.nav.index', compact('navigates'));
+    }
+
+    public function getUpdate($act, $id = 0){
+        $nav = new Navigate();
+        if($act != 'add'){
+            $nav = Navigate::find($id);
+            if($act == 'delete'){
+                $info = ['from' => 'del', 'status' => 'failed'];
+                if($nav->delete()){
+                    $info['status'] = 'success';
+                    j4flash($info);
+                    return redirect('admin/navigate');
+                }else{
+                    j4flash($info);
+                    return redirect('admin/navigate');
+                }
+            }
+        }
+        return view('admin.nav.update', compact('nav'));
+    }
+
+    public function postUpdate(NavigateRequest $request, $act, $id = 0){
+        $nav = new Navigate();
+        if($act == 'edit'){
+            $nav = Navigate::find($id);
+            if(!$nav){
+                return redirect()->back()->withErrors(['err' => lang('invalid nav')])->withInput();
+            }
+        }
+        $nav->title = $request->input('title');
+        $nav->url = $request->input('url');
+        $nav->status = $request->input('status');
+        $nav->order = $request->input('order');
+        $nav->parent_id = $request->input('parent');
+        $nav->bind_node_id = $request->input('node');
+        if($nav->save()){
+            $info = ['from' => 'update', 'status' => 'success'];
+            j4flash($info);
+            return redirect('admin/navigate');
+        }else{
+            return redirect()->back()->withErrors(['err' => lang('submit failed')])->withInput();
+        }
     }
 
     /**

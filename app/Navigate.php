@@ -27,4 +27,28 @@ class Navigate extends Model
                     ->where('depth', 0)
                     ->orderBy('order', 'asc');
     }
+
+    public function scopeHiddenNav($query){
+        return $query->where('status', 0)
+                    ->where('depth', 0)
+                    ->orderBy('order', 'asc');
+    }
+
+    public function scopeTop($query){
+        return $query->where('depth', 0)
+                    ->orderBy('order', 'asc');
+    }
+
+    public function chain(){
+        $navChain = [];
+        $thread = trim($this->thread, '/');
+        $arr = explode('/', $thread);
+        $arr = array_filter($arr);
+        foreach ($arr as $n) {
+            array_push($navChain, $this->find($n));
+        }
+        array_push($navChain, $this);
+        return $navChain;
+    }
+
 }

@@ -70,6 +70,8 @@ return [
     'seo title' => 'SEO 标题',
     'flag' => '标识',
 
+    'invalid node' => '栏目不存在或已删除',
+    'invalid nav' => '导航不存在或已删除',
     'select all' => '全选',
     'move to' => '移动到',
     'mark to' => '标记为',

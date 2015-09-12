@@ -36,7 +36,7 @@ class Node extends Model
     }
 
     /**
-     * get the array of current node's parents and children
+     * get the array of current node's parent nodes
      * @return array
      */
     public function chain()

@@ -1,6 +1,6 @@
 @if($node->children)
 <tr>
-    <td colspan="{{ $cols }}" class="sub-nav">
+    <td colspan="5" class="sub-nav">
         <table class="table">
             @forelse($node->children as $snode)
             <tr>
@@ -14,10 +14,10 @@
                 </td>
             </tr>
             @if($snode->children)
-                @include('layouts.node', ['node' => $snode, 'cols' => 5])
+                @include('layouts.node', ['node' => $snode])
             @endif
             @empty
-            <tr><td colspan="{{ $cols }}">{{ lang('no data') }}</td></tr>
+            <tr><td colspan="5">{{ lang('no data') }}</td></tr>
             @endforelse
         </table>
     </td>

@@ -55,7 +55,7 @@
             </td>
         </tr>
         <!-- sub node -->
-        @include('layouts.node', ['node' => $node, 'cols' => 5])
+        @include('layouts.node', ['node' => $node])
         <!-- end sub node -->
         @empty
         <tr><td colspan="5">{{ lang('no data') }}</td></tr>
