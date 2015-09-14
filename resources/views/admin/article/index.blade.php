@@ -28,6 +28,7 @@
                 <span>
                 {{ lang('move to') }}
                 <select name="_node" onchange="batchUpdate(this, '{{ url('admin/article/batch') }}')">
+                    <option value="-7">{{ lang('node') }}</option>
                     @foreach($nodes as $node)
                         <option value="{{ $node->id }}">{{ $node->name }}</option>
                         @foreach($node->children as $snode)
@@ -40,6 +41,7 @@
                 </select>&nbsp;&nbsp;
                 {{ lang('mark to') }}
                 <select name="_status" onchange="batchUpdate(this, '{{ url('admin/article/batch') }}')">
+                    <option value="-7">{{ lang('status') }}</option>
                     <option value="0">{{ lang('hidden') }}</option>
                     <option value="1">{{ lang('show') }}</option>
                     <option value="2">{{ lang('hot') }}</option>

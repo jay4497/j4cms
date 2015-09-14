@@ -21,6 +21,8 @@ Route::controller('auth', 'Auth\AuthController');
 Route::get('admin', 'Admin\PageController@index');
 // node
 Route::controller('admin/node', 'Admin\NodeController');
+// navigate
+Route::controller('admin/navigate', 'Admin\NavigateController');
 // article
 Route::controller('admin/article', 'Admin\ArticleController');
 // link

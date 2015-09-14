@@ -22,6 +22,7 @@
                 <span>
                 {{ lang('move to') }}
                 <select name="_parent" onchange="batchUpdate(this, '{{ url('admin/node/batch') }}')">
+                    <option value="-7">{{ lang('node') }}</option>
                     @forelse($nodes as $node)
                         <option value="{{ $node->id }}">{{ $node->name }}</option>
                         @foreach($node->children as $snode)

@@ -4,7 +4,7 @@
         <table class="table">
             @forelse($node->children as $snode)
             <tr>
-                <td><input type="checkbox" value="{{ $snode->id }}" /> </td>
+                <td><input type="checkbox" class="check" value="{{ $snode->id }}" /> </td>
                 <td>{{ $snode->id }}</td>
                 <td>{{ $snode->name }}({{ $snode->order }})</td>
                 <td>{{ $snode->path }}</td>

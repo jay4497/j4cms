@@ -21,6 +21,10 @@ return [
 
     'article manage' => '内容管理',
     'add' => '添加',
+    'news list' => '新闻列表',
+    'news add' => '添加新闻',
+    'product list' => '产品列表',
+    'product add' => '添加新产品',
     'nav manage' => '导航管理',
     'nav list' => '导航列表',
     'nav add' => '添加新导航',
@@ -75,6 +79,7 @@ return [
     'select all' => '全选',
     'move to' => '移动到',
     'mark to' => '标记为',
+    'bind to' => '绑定到',
     'hidden' => '隐藏',
     'show' => '显示',
     'hot' => '热门',

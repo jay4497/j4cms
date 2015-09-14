@@ -23,6 +23,7 @@
                 <a class="btn btn-default btn-sm" href="javascript:;" onclick="batchDel('{{ url('admin/feedback') }}')">{{ lang('delete') }}</a>&nbsp;&nbsp;
                 {{ lang('mark to') }}
                 <select name="_status" onchange="batchUpdate(this, '{{ url('admin/feedback/batch') }}')">
+                    <option value="-7">{{ lang('status') }}</option>
                     <option value="1">{{ lang('have read') }}</option>
                     <option value="0">{{ lang('not read') }}</option>
                     <option value="2">{{ lang('hidden') }}</option>

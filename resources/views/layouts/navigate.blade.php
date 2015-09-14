@@ -4,7 +4,7 @@
             <table class="table">
                 @forelse($nav->children as $snav)
                 <tr>
-                    <td><input type="checkbox" value="{{ $snav->id }}" /></td>
+                    <td><input type="checkbox" class="check" value="{{ $snav->id }}" /></td>
                     <td>{{ $snav->title }}({{ $snav->order }})</td>
                     <td>{{ $snav->url }}</td>
                     <td>{{ $snav->node->name }}</td>

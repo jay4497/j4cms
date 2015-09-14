@@ -31,7 +31,7 @@
                     <label class="control-label col-sm-2">{{ lang('status') }}</label>
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <input type="radio" name="status" value="1" />{{ lang('show') }}
+                            <input type="radio" name="status" value="1" checked />{{ lang('show') }}
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="status" value="0" />{{ lang('hidden') }}

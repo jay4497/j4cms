@@ -61,6 +61,7 @@ function batchDel(url){
                 alert('failed');
             }else{
                 alert('success');
+                location.reload();
             }
         },
         error: function(e,err){
@@ -72,6 +73,9 @@ function batchDel(url){
 function batchUpdate(sender, url){
     var key = $(sender).attr('name');
     var val = $(sender).val();
+    if(val < 0){
+        return;
+    }
     var ids = '';
     $('#check-trace .check').each(function() {
         if ($(this).prop('checked')) {
@@ -100,6 +104,7 @@ function batchUpdate(sender, url){
                 alert('failed');
             }else{
                 alert('success');
+                location.reload();
             }
         },
         error: function(e, err){

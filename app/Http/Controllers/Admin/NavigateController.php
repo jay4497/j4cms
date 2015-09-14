@@ -64,6 +64,43 @@ class NavigateController extends Controller
         }
     }
 
+    public function postBatch($act = 'update'){
+        $result = false;
+        $ids = \Request::input('ids');
+        $idArr = explode(',', $ids);
+        switch($act){
+            case 'delete':
+                $result = Navigate::whereIn('id', $idArr)->delete();
+                break;
+            case 'update':
+                $key = \Request::input('key');
+                $value = \Request::input('value');
+                $tempData = $this->parseKey($key, $value);
+                $result = Navigate::whereIn('id', $idArr)->update($tempData);
+                break;
+        }
+        $msg = [];
+        if($result){
+            $msg['status'] = 'success';
+        }else{
+            $msg['status'] = 'failed';
+        }
+        return response(json_encode($msg))->header('Content-Type', 'application/json');
+    }
+
+    public function parseKey($key, $value){
+        $result = [];
+        switch($key){
+            case '_node':
+                $result['bind_node_id'] = $value;
+                break;
+            case '_status':
+                $result['status'] = $value;
+                break;
+        }
+        return $result;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
