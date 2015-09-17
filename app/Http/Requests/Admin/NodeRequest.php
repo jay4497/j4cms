@@ -13,7 +13,9 @@ class NodeRequest extends Request
      */
     public function authorize()
     {
-        //return false;
+        if(auth()->guest()) {
+            return false;
+        }
         return true;
     }
 
@@ -25,7 +27,9 @@ class NodeRequest extends Request
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'url' => 'url',
+            'order' => 'integer'
         ];
     }
 }

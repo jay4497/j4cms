@@ -73,6 +73,7 @@ return [
     'node' => '栏目',
     'seo title' => 'SEO 标题',
     'flag' => '标识',
+    'views' => '浏览数',
 
     'invalid node' => '栏目不存在或已删除',
     'invalid nav' => '导航不存在或已删除',

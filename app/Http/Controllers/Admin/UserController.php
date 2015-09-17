@@ -10,6 +10,10 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('guest', ['except' => ['login']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

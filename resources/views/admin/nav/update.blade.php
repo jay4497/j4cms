@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="order" id="order" value="{{ old('order')? : $nav->order }}" />
+                        <input type="number" class="form-control" name="order" id="order" value="{{ old('order')? : $nav->order }}" />
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">{{ lang('submit') }}</button>

@@ -14,7 +14,7 @@ class AdRequest extends Request
     public function authorize()
     {
         if(auth()->guest()){
-            //return false;
+            return false;
         }
         return true;
     }
@@ -28,6 +28,7 @@ class AdRequest extends Request
     {
         return [
             'title' => 'required',
+            'url' => 'alpha_dash',
             'width' => 'integer',
             'height' => 'integer',
             'start_show' => 'date',

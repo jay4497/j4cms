@@ -62,7 +62,7 @@
             <div class="form-group">
                 <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="order" name="order" value="{{ old('order')? : $ad->order }}" />
+                    <input type="number" class="form-control" id="order" name="order" value="{{ old('order')? : $ad->order }}" />
                 </div>
             </div>
             <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}" />

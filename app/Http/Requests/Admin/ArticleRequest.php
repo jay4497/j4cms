@@ -28,6 +28,7 @@ class ArticleRequest extends Request
     {
         return [
             'title' => 'required',
+            'views' => 'integer',
             'order' => 'integer'
         ];
     }

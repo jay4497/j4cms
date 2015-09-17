@@ -13,7 +13,10 @@ class NavigateRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        if(auth()->guest()){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -24,7 +27,9 @@ class NavigateRequest extends Request
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'url' => 'required|alpha_dash',
+            'order' => 'integer'
         ];
     }
 }

@@ -19,6 +19,7 @@ class Article extends Model
         'outline',
         'content',
         'order',
+        'views',
         'status',
         'recommend',
         'hot',

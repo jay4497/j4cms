@@ -69,6 +69,7 @@ class ArticleController extends Controller
         $article->outline = $request->input('outline')?: str_limit(strip_tags($request->input('content')));
         $article->content = $request->input('content');
         $article->order = $request->input('order');
+        $article->views = $request->input('views');
         $article->hot = $request->input('hot')? 1: 0;
         $article->status = $request->input('status')? 1: 0;
         $article->recommend = $request->input('recommend')? 1: 0;

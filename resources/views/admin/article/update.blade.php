@@ -98,9 +98,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="views" class="control-label col-sm-2">{{ lang('views') }}</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="views" name="views" value="{{ old('views')? : $article->views }}" />
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="order" class="control-label col-sm-2">{{ lang('orderby') }}</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="order" name="order" value="{{ old('order')? : $article->order }}" placeholder="{{ lang('input order') }}" />
+                    <input type="number" class="form-control" id="order" name="order" value="{{ old('order')? : $article->order }}" placeholder="{{ lang('input order') }}" />
                 </div>
             </div>
             <input type="hidden" name="_token" id="csrf_token" value="{{ csrf_token() }}" />
